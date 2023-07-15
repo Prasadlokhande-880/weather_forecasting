@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Gloock&family=Josefin+Sans&family=Poppins&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: 'Poppins';
+            margin: 0px;
+        }
+
+        .navbar {
+            background-color: rgb(26, 2, 49);
+            display: flex;
+            align-items: center;
+            gap: 60%;
+            flex-wrap: wrap; /* Added flex-wrap property for responsiveness */
+            justify-content: space-between; /* Adjusted justify-content property */
+            padding: 10px; /* Added padding for spacing */
+        }
+
+        .navimg {
+            width: 80px;
+            padding: 10px;
+            margin: 0px;
+        }
+
+        div a {
+            text-decoration: none;
+            color: white;
+            font-size: 18px;
+            padding: 5px;
+            margin: 10px;
+        }
+
+        .hover-underline-animation {
+            display: inline-block;
+            position: relative;
+            color: #ffffff;
+        }
+
+        .hover-underline-animation::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            transform: scaleX(0);
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: #ffffff;
+            transform-origin: bottom right;
+            transition: transform 0.25s ease-out;
+        }
+
+        .hover-underline-animation:hover::after {
+            transform: scaleX(1);
+            transform-origin: bottom left;
+            border-radius: 10px;
+            text-decoration: none;
+        }
+
+    a{
+         text-decoration: none;
+    }
+        @media screen and (max-width: 950px) {
+            .navbar {
+                gap: 200px;
+            }
+        }
+        @media screen and (max-width: 600px) {
+            .navbar {
+                gap: 10px;
+            }
+        }
+
+        @media screen and (max-width: 400px) {
+            div a {
+                font-size: 15px;
+                padding: 5px;
+            }
+            .navbar {
+                gap: 0px;
+            }
+
+            div imgP{
+                width: 50px;
+                padding: 5px;
+            }
+        }
+
+        @media screen and (max-width: 400px) {
+            div a {
+                font-size: 14px;
+                padding: 3px;
+            }
+
+            div imgP{
+                width: 50px;
+                padding: 2px;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div>
+            <img class="navimg" src="https://cdn4.vectorstock.com/i/1000x1000/09/33/company-icon-for-graphic-and-web-design-vector-31970933.jpg" alt="">
+        </div>
+        <div class="links">
+            <a href="/" class="hover-underline-animation">Home</a>
+            <a href="/about" class="hover-underline-animation">About</a>
+            <a href="/weather" class="hover-underline-animation">Weather</a>
+        </div>
+    </nav>
+</body>
+</html>

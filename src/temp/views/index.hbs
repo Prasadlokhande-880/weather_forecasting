@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <title>Swiper demo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" />
+  <!-- Link Swiper's CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
+
+  <!-- Demo styles -->
+  <style>
+    html,
+    body {
+      position: relative;
+      height: 100%;
+    }
+
+    body {
+      background: aliceblue;
+      font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+      font-size: 14px;
+      color: #000;
+      margin: 0;
+      padding: 0;
+    }
+
+    .swiper-slide {
+      text-align: center;
+      font-size: 18px;
+      background: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 0px;
+      padding: 0px;
+    }
+
+    .swiper-slide img {
+      border-radius: 18px;
+      display: block;
+      width: 100%;
+      height: 500px;
+      object-fit: cover;
+    }
+
+    .main_div{
+      display: flex;
+      align-items: center;
+      margin: 20px;
+      padding: 20px;
+      justify-content: space-evenly;
+    }
+
+    .info{
+      font-size: 19px;
+      color: #2b2929;
+      padding: 10px;
+      margin: 10px;
+      width: 100%;
+    }
+
+   h1{
+    font-size: 35px;
+    color: #2b2929;
+    font-weight: 800;
+    text-align: center;
+   }
+
+    @media screen and (max-width: 800px) {
+    .main_div{
+      display: block;
+    }
+ .swiper-slide img {
+   width: 80%;
+   height: auto;
+   margin: auto;
+ }
+
+    }
+  </style>
+</head>
+
+<body>
+
+  {{>navbar}}
+  <!-- Swiper -->
+  <div class="main_div">
+  <div class="swiper mySwiper">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide"><img src="https://media-cldnry.s-nbcnews.com/image/upload/t_focal-760x428,f_auto,q_auto:best/MSNBC/Components/Video/201906/d_mach_elnino_1906260.jpg"/></div>
+      <div class="swiper-slide"><img src="https://static.toiimg.com/thumb/msid-67971049,width-400,resizemode-4/67971049.jpg"/></div>
+      <div class="swiper-slide"><img src="https://static.sciencelearn.org.nz/images/images/000/003/176/embed/FIR_ITV_RuralFireRisk_Weather_CloudySky_123RF_901534.jpg?1674170209"/></div>
+    </div>
+    <div class="swiper-button-next"></div>
+    <div class="swiper-button-prev"></div>
+    <div class="swiper-pagination"></div>
+  </div>
+  <div class="info">
+    <h1>Weather</h1>
+   Weather refers to the state of the atmosphere at a particular place and time. It encompasses various elements such as temperature, humidity, air pressure, wind speed and direction, precipitation, and cloud cover. Weather conditions can change rapidly due to the complex interactions between the atmosphere, land, and oceans.
+
+  </div>
+
+</div>
+  <!-- Swiper JS -->
+  <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+
+  <!-- Initialize Swiper -->
+  <script>
+    var swiper = new Swiper(".mySwiper", {
+      spaceBetween: 30,
+      centeredSlides: true,
+      autoplay: {
+        delay: 2500,
+        disableOnInteraction: false,
+      },
+      pagination: {
+        el: ".swiper-pagination",
+        clickable: true,
+      },
+      navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
+      },
+    });
+  </script>
+
+  {{>footer}}
+</body>
+
+</html>

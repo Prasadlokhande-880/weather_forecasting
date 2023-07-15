@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        .input_fromUser {
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        form {
+            position: relative;
+            width: 60%;
+            margin: auto;
+        }
+
+        button {
+            height: 40px;
+            width: 100px;
+            border-radius: 20px;
+            font-size: 18px;
+            color: #f4f4f4;
+            border: 2px solid;
+            background-color: rgb(41, 6, 73);
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: rgb(85, 33, 135);
+        }
+
+        form input {
+            width: 80%;
+            height: 40px;
+            padding: 10px;
+            margin: 10;
+            background-color: rgb(52, 51, 53);
+            color: #f4f4f4;
+            border: 1px solid rgb(0, 0, 0);
+            border-radius: 30px;
+        }
+
+        ::placeholder {
+            font-size: 15px;
+            color: rgb(255, 255, 255);
+            opacity: 1; /* Firefox */
+        }
+
+        .output_from {
+            width: 40%;
+            padding: 20px;
+            margin: auto;
+            margin-top: 50px;
+            border-radius: 20px;
+            background-color: gray;
+        }
+
+        .time_day {
+            display: flex;
+            justify-content: space-between;
+            background-color: black;
+            border-radius: 20px;
+            color: white;
+            padding: 10px;
+            margin: auto;
+            font-size: 18px;
+        }
+
+        .output {
+            display: flex;
+            font-size: 25px;
+            padding: 10px;
+            font-weight: 700;
+        }
+
+        .temp_img {
+            display: flex;
+            justify-content: space-around;
+            font-weight: 900;
+            font-size: 45px;
+            padding: 0px;
+            margin: opx;
+            font-family: 'Times New Roman', Times, serif;
+        }
+
+        #img_satte {
+            width: 70px;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            form {
+                width: 80%;
+            }
+
+            .output_from {
+                width: 80%;
+            }
+
+            .time_day {
+                font-size: 16px;
+            }
+
+            .output {
+                font-size: 20px;
+            }
+
+            .temp_img {
+                font-size: 30px;
+            }
+
+            #img_satte {
+                width: 50px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            form {
+                width: 90%;
+            }
+
+            .output_from {
+                width: 90%;
+            }
+
+            .time_day {
+                font-size: 14px;
+            }
+
+            .output {
+                font-size: 18px;
+            }
+
+            .temp_img {
+                font-size: 25px;
+            }
+
+            #img_satte {
+                width: 40px;
+            }
+        }
+    </style>
+</head>
+<body>
+    {{>navbar}}
+    <div class="input_fromUser">
+        <form>
+            <input type="text" placeholder="Enter City Name" id="cityName" />
+            <button class="sub" type="submit" value="search">Submit</button>
+        </form>
+    </div>
+
+    <div class="output_from">
+        <div class="time_day">
+            <p class="time"></p>
+            <p class="day"></p>
+        </div>
+        <div class="output">
+            <p class="city">Enter your city name</p>
+            <p class="Country"></p>
+        </div>
+        <div class="temp_img">
+            <p class="temp"></p>
+            <img class="weatherico" src="" id="img_satte" alt>
+        </div>
+    </div>
+    {{>footer}}
+    <script>
+        const today = new Date();
+        const day = today.getDay();
+        const daylist = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+        const hour = today.getHours();
+        const minute = today.getMinutes();
+
+        const timeElement = document.querySelector('.time');
+        const dayElement = document.querySelector('.day');
+
+        timeElement.innerHTML = `Today is: ${daylist[day]}.`;
+        dayElement.innerHTML = `${hour}:${minute}`;
+
+        const callback = async (event) => {
+            event.preventDefault();
+            const cityValue = document.getElementById("cityName").value;
+
+            if (cityValue === '') {
+                console.error("Your city name is invalid");
+                document.getElementsByClassName("output")[0].innerText = "Please enter a valid city name";
+            } else {
+                try {
+                    const apiKey = '7a631a42108af4ff2ce251ea1616047c'; // Replace with your actual API key
+                    const url = `https://api.openweathermap.org/data/2.5/weather?q=${cityValue}&appid=${apiKey}`;
+                    const response = await fetch(url);
+                    const data = await response.json();
+                    console.log(data.main.temp);
+                    console.log(data.name);
+                    console.log(data.sys.country);
+                    console.log(data.weather[0].main);
+                    document.getElementsByClassName("temp")[0].innerHTML=data.main.temp+"F";
+                    document.getElementsByClassName("city")[0].innerHTML=data.name+" , ";
+                    document.getElementsByClassName("Country")[0].innerHTML=data.sys.country;
+
+                    const i=document.getElementById("img_satte");
+
+                    if(data.weather[0].main==='Clouds'){
+                        i.src="https://w7.pngwing.com/pngs/21/353/png-transparent-computer-icons-cloud-computing-cloud-storage-cloud-computer-network-cloud-heart.png";
+                    }
+                    else if(data.weather[0].main==='rain'){
+                        i.src="https://static.vecteezy.com/system/resources/previews/009/700/808/original/cloud-rain-icon-eps-10-free-vector.jpg";
+                    }
+                    else{
+                        i.src="https://cdn-icons-png.flaticon.com/512/169/169367.png";
+                    }
+
+                } catch (error) {
+                    document.getElementsByClassName("city")[0].innerHTML="Please write the name properly";
+                    console.error("An error occurred while fetching weather data", error);
+                }
+            }
+        }
+
+        document.querySelector('.sub').addEventListener("click", callback);
+    </script>
+</body>
+</html>
